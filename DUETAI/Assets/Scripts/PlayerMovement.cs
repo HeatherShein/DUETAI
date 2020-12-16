@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -106,5 +107,19 @@ public class PlayerMovement : MonoBehaviour
                 GameManager.Instance.isGameOver = false;
                 MoveUp();
             });
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("LevelEnd"))
+        {
+            Destroy(other.gameObject);
+            Debug.Log("Win");
+
+            int currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
+
+            if (currentLevelIndex < SceneManager.sceneCount)
+                SceneManager.LoadSceneAsync(++currentLevelIndex);
+        }
     }
 }
