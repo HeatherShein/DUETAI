@@ -3,6 +3,18 @@
 public class PlayerMovement : MonoBehaviour
 {
 
+    #region Singleton class: PlayerMovement
+
+    public static PlayerMovement Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+    }
+
+    #endregion
+
     [SerializeField] float speed;
     [SerializeField] float rotationSpeed;
 
@@ -24,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
             rb.angularVelocity = 0f;
+        
     }
 
     void MoveUp()
