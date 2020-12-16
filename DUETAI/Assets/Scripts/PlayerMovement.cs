@@ -24,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody2D rb;
     Vector3 startPosition;
+    Camera cam;
+    float touchPosX;
     
     void Start()
     {
@@ -31,19 +33,38 @@ public class PlayerMovement : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
 
+        cam = Camera.main;
+
         MoveUp();
     }
     
     void Update()
     {
-        if (Input.GetKey(KeyCode.LeftArrow))
-            RotateLeft();
-        else if (Input.GetKey(KeyCode.RightArrow))
-            RotateRight();
+        if(!GameManager.Instance.isGameOver)
+        {
+            if (Input.GetMouseButtonDown(0))
+                touchPosX = cam.ScreenToWorldPoint(Input.mousePosition).x;
 
-        if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
-            rb.angularVelocity = 0f;
-        
+            if (Input.GetMouseButton(0))
+            {
+                if (touchPosX > 0.01f)
+                    RotateRight();
+                else
+                    RotateLeft();
+            }
+            else
+                rb.angularVelocity = 0f;
+
+            #if UNITY_EDITOR
+            if (Input.GetKey(KeyCode.LeftArrow))
+                RotateLeft();
+            else if (Input.GetKey(KeyCode.RightArrow))
+                RotateRight();
+
+            if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
+                rb.angularVelocity = 0f;
+            #endif
+        }
     }
 
     void MoveUp()
