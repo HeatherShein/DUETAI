@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 
+/*
+ *  Game Manager.
+ *  Deals with gmae over.
+ */
 public class GameManager : MonoBehaviour
 {
 

@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 
+/*
+ *  Deals with collisions between player and obstacles.
+ *  Triggers explosion, ends the game and restarts it.
+ */
 public class BallCollision : MonoBehaviour
 {
     ParticleSystem explosionFx;

@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using DG.Tweening;
 
+/*
+ *  Makes an obstacle rotate with a rotation duration you determine.
+ */
 public class ObstacleRotation : MonoBehaviour
 {
     [SerializeField] float rotationDuration;

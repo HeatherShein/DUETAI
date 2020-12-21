@@ -2,6 +2,10 @@
 using DG.Tweening;
 using UnityEngine.SceneManagement;
 
+/*
+ *  Singleton to globally access the Player's information
+ *  Moves the Player up, rotates him.
+ */
 public class PlayerMovement : MonoBehaviour
 {
 
@@ -24,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float rotationSpeed;
 
     Rigidbody2D rb;
-    Vector3 startPosition;
+    public Vector3 startPosition;
     Camera cam;
     float touchPosX;
     

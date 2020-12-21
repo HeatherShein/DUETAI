@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using DG.Tweening;
 
+/*
+ *  Makes an obstacle slide with a slide distance and a slide duration you determine.
+ */
 public class ObstacleSliding : MonoBehaviour
 {
     [SerializeField] float slideDistance;

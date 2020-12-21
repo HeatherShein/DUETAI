@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/*
+ *  Follows the player.
+ */
 public class CameraFollow : MonoBehaviour
 {
     Transform target;

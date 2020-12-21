@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/*
+ *  Singleton to collect all the splatters displayed once the player hit an obstacle.
+ */
 public class Splatters : MonoBehaviour
 {
     #region Singleton class: Splatters
