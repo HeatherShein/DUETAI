@@ -6,6 +6,8 @@
  */
 public class BallCollision : MonoBehaviour
 {
+    [SerializeField] bool AIPlay = false;
+
     ParticleSystem explosionFx;
     int ballIndex;
 
@@ -23,6 +25,11 @@ public class BallCollision : MonoBehaviour
 
             explosionFx.Play();
             Splatters.Instance.AddSplatter(other.transform, other.contacts[0].point, ballIndex);
+
+            if (AIPlay)
+            {
+                Spawner.Instance.DestroyAllSpawnedObjects();
+            }
 
             PlayerMovement.Instance.Restart();
         }
