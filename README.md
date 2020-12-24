@@ -28,7 +28,7 @@ There were two different ways of solving the problem that were implemented :
 * One with Unity ML-Agents 1.0 that trains a neural network to then play the game.
 * One using a genetic algorithm.
 
-## Credit
+## Credits
 
 Thanks to Hamza Herbou for his DUET replica tutorial on YouTube.
 Thanks to Sebastian Schuchmann for his tutorials on Unity ML-Agents on YouTube.
