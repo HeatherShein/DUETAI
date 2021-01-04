@@ -6,12 +6,19 @@ using TMPro;
  */
 public class Score : MonoBehaviour
 {
-
+    [SerializeField] bool AIPlay = false;
     [SerializeField] public Transform player;
     [SerializeField] public TextMeshProUGUI display;
 
     void Update()
     {
-        display.text = "Score : " + (player.position.y - PlayerMovement.Instance.startPosition.y).ToString("0");
+        if (AIPlay)
+        {
+            display.text = "Score : " + (player.position.y - ForwardMovement.Instance.startPosition.y).ToString("0");
+        }
+        else
+        {
+            display.text = "Score : " + (player.position.y - PlayerMovement.Instance.startPosition.y).ToString("0");
+        }
     }
 }

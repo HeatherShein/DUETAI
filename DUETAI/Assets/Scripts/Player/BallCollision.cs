@@ -29,9 +29,12 @@ public class BallCollision : MonoBehaviour
             if (AIPlay)
             {
                 Spawner.Instance.DestroyAllSpawnedObjects();
+                ForwardMovement.Instance.Restart();
             }
-
-            PlayerMovement.Instance.Restart();
+            else
+            {
+                PlayerMovement.Instance.Restart();
+            }
         }
     }
 }

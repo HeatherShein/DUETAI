@@ -5,11 +5,19 @@
  */
 public class CameraFollow : MonoBehaviour
 {
+    [SerializeField] bool AIPlay = false;
     Transform target;
 
     void Start()
     {
-        target = PlayerMovement.Instance.transform;
+        if (AIPlay)
+        {
+            target = ForwardMovement.Instance.transform;
+        }
+        else
+        {
+            target = PlayerMovement.Instance.transform;
+        }
     }
     
     void LateUpdate()

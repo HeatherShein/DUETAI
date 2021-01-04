@@ -20,8 +20,11 @@ public class Spawner : MonoBehaviour
 
     [SerializeField] public Transform player;
     [SerializeField] private List<GameObject> cornerObstacles;
+    [SerializeField] private List<int> cornerProbabilities;
     [SerializeField] private List<GameObject> halfObstacles;
+    [SerializeField] private List<int> halfProbabilities;
     [SerializeField] private List<GameObject> centerObstacles;
+    [SerializeField] private List<int> centerProbabilities;
 
     #region SpawnParameters
     private enum SpawnPosition
@@ -61,23 +64,23 @@ public class Spawner : MonoBehaviour
         {
             case SpawnPosition.Left:
                 pos.x = -xOffset;
-                spawnable = GetRandomSpawnableFromList(cornerObstacles);
+                spawnable = GetRandomSpawnableFromList(cornerObstacles, cornerProbabilities);
                 break;
             case SpawnPosition.Left_Center:
                 pos.x = -xOffset / 2;
-                spawnable = GetRandomSpawnableFromList(halfObstacles);
+                spawnable = GetRandomSpawnableFromList(halfObstacles, halfProbabilities);
                 break;
             case SpawnPosition.Center:
                 pos.x = 0;
-                spawnable = GetRandomSpawnableFromList(centerObstacles);
+                spawnable = GetRandomSpawnableFromList(centerObstacles, centerProbabilities);
                 break;
             case SpawnPosition.Right_Center:
                 pos.x = xOffset / 2;
-                spawnable = GetRandomSpawnableFromList(halfObstacles);
+                spawnable = GetRandomSpawnableFromList(halfObstacles, halfProbabilities);
                 break;
             case SpawnPosition.Right:
                 pos.x = xOffset;
-                spawnable = GetRandomSpawnableFromList(cornerObstacles);
+                spawnable = GetRandomSpawnableFromList(cornerObstacles, cornerProbabilities);
                 break;
             default:
                 Debug.LogError("Error: Spawn Position not found : " + spawnPosition.ToString());
@@ -95,10 +98,24 @@ public class Spawner : MonoBehaviour
         StartCoroutine(nameof(Spawn));
     }
 
-    private GameObject GetRandomSpawnableFromList(List<GameObject> obstacles)
+    private GameObject GetRandomSpawnableFromList(List<GameObject> obstacles, List<int> probabilities)
     {
-        int randomIndex = Random.Range(0, obstacles.Count);
-        return obstacles[randomIndex];
+        int random = Random.Range(0, 100);
+        int index = 0;
+        int lastProbability = 0;
+        foreach (var probability in probabilities)
+        {
+            if (random >= lastProbability && random < probability)
+            {
+                break;
+            }
+            else
+            {
+                lastProbability = probability;
+                index++;
+            }
+        }
+        return obstacles[index];
     }
 
     public void DestroyAllSpawnedObjects()
