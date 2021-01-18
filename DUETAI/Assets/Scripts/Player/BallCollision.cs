@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Unity.MLAgents;
 
 /*
  *  Deals with collisions between player and obstacles.
@@ -7,6 +8,7 @@
 public class BallCollision : MonoBehaviour
 {
     [SerializeField] bool AIPlay = false;
+    [SerializeField] Rotater rotater;
 
     ParticleSystem explosionFx;
     int ballIndex;
@@ -21,6 +23,8 @@ public class BallCollision : MonoBehaviour
     {
         if (other.collider.CompareTag("Obstacle"))
         {
+            Debug.Log(other.gameObject);
+
             GameManager.Instance.isGameOver = true;
 
             explosionFx.Play();
@@ -28,8 +32,8 @@ public class BallCollision : MonoBehaviour
 
             if (AIPlay)
             {
-                Spawner.Instance.DestroyAllSpawnedObjects();
-                ForwardMovement.Instance.Restart();
+                rotater.AddReward(-1f);
+                rotater.EndEpisode();
             }
             else
             {

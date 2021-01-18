@@ -1,48 +1,34 @@
 ﻿using UnityEngine;
+using Unity.MLAgents;
+using Unity.MLAgents.Actuators;
+using Unity.MLAgents.Sensors;
 
 /*
  *  Agent that is in charge to rotate the player in order to avoid obstacles
  */
-public class Rotater : MonoBehaviour
+public class Rotater : Agent
 {
     [SerializeField] float rotationSpeed;
 
-    [SerializeField] Rigidbody2D rb;
+    Rigidbody2D rb;
     float touchPosX;
     Camera cam;
 
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         cam = Camera.main;
     }
 
-    void Update()
+    public override void OnEpisodeBegin()
     {
-        if (!GameManager.Instance.isGameOver)
-        {
-            if (Input.GetMouseButtonDown(0))
-                touchPosX = cam.ScreenToWorldPoint(Input.mousePosition).x;
+        Spawner.Instance.DestroyAllSpawnedObjects();
+        ForwardMovement.Instance.RestartAI();
+    }
 
-            if (Input.GetMouseButton(0))
-            {
-                if (touchPosX > 0.01f)
-                    RotateRight();
-                else
-                    RotateLeft();
-            }
-            else
-                rb.angularVelocity = 0f;
-
-#if UNITY_EDITOR
-            if (Input.GetKey(KeyCode.LeftArrow))
-                RotateLeft();
-            else if (Input.GetKey(KeyCode.RightArrow))
-                RotateRight();
-
-            if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
-                rb.angularVelocity = 0f;
-#endif
-        }
+    void Stop()
+    {
+        rb.angularVelocity = 0f;
     }
 
     void RotateLeft()
@@ -53,5 +39,41 @@ public class Rotater : MonoBehaviour
     void RotateRight()
     {
         rb.angularVelocity = -rotationSpeed;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Score"))
+        {
+            AddReward(0.1f);
+            Destroy(collision.gameObject);
+        }
+    }
+
+    public override void CollectObservations(VectorSensor sensor)
+    {
+        sensor.AddObservation(transform.position);
+    }
+
+    public override void OnActionReceived(ActionBuffers actions)
+    {
+        if (actions.DiscreteActions[0] == 1)
+            RotateLeft();
+        else if (actions.DiscreteActions[0] == 2)
+            RotateRight();
+        else
+            Stop();
+    }
+
+    public override void Heuristic(float[] actionsOut)
+    {
+        actionsOut[0] = 0;
+        if (Input.GetKey(KeyCode.LeftArrow))
+            actionsOut[0] = 1;
+        else if (Input.GetKey(KeyCode.RightArrow))
+            actionsOut[0] = 2;
+
+        if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
+            actionsOut[0] = 0;
     }
 }

@@ -66,4 +66,14 @@ public class ForwardMovement : MonoBehaviour
                 MoveUp();
             });
     }
+
+    public void RestartAI()
+    {
+        rb.angularVelocity = 0f;
+        rb.velocity = Vector2.zero;
+
+        transform.rotation = Quaternion.identity;
+        transform.position = startPosition;
+        MoveUp();
+    }
 }

@@ -25,6 +25,8 @@ public class Spawner : MonoBehaviour
     [SerializeField] private List<int> halfProbabilities;
     [SerializeField] private List<GameObject> centerObstacles;
     [SerializeField] private List<int> centerProbabilities;
+    [SerializeField] private GameObject score;
+    [SerializeField] private Vector3 scoreOffset;
 
     #region SpawnParameters
     private enum SpawnPosition
@@ -92,6 +94,7 @@ public class Spawner : MonoBehaviour
 
         // Instantiate the obstacle
         var spawned = Instantiate(spawnable, pos, transform.rotation, transform);
+        var scoreSpawned = Instantiate(score, pos + scoreOffset, transform.rotation, transform);
         spawnedObjects.Add(spawned);
 
         yield return new WaitForSeconds(Random.Range(minSpawnIntervalInSeconds, maxSpawnIntervalInSeconds));

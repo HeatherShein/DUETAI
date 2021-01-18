@@ -1,0 +1,24 @@
+{
+    "Rotater": {
+        "checkpoints": [
+            {
+                "steps": 106129,
+                "file_path": "results\\Rotater\\Rotater\\Rotater-106129.onnx",
+                "reward": -0.8797468297843691,
+                "creation_time": 1610961701.2318246
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 106129,
+            "file_path": "results\\Rotater\\Rotater.onnx",
+            "reward": -0.8797468297843691,
+            "creation_time": 1610961701.2318246
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.2.0",
+        "mlagents_version": "0.23.0",
+        "torch_version": "1.7.0+cu110",
+        "tensorflow_version": -1
+    }
+}

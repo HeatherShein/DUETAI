@@ -21,6 +21,14 @@ public class ObstacleCleaner : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Score"))
+        {
+            Destroy(collision.gameObject);
+        }
+    }
+
     void LateUpdate()
     {
         transform.position = target.position + offset;
