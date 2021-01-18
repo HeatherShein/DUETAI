@@ -18,7 +18,7 @@ This project re-implemented DUET using Unity, offers a simple level based game f
 
 This project was created using:
 
-* Unity 2018.3.0
+* Unity 2019.4.17f1
 * Unity ML-Agents 1.0
 
 ## AI Solving
