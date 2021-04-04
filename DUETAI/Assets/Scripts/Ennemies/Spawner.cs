@@ -96,6 +96,7 @@ public class Spawner : MonoBehaviour
         var spawned = Instantiate(spawnable, pos, transform.rotation, transform);
         var scoreSpawned = Instantiate(score, pos + scoreOffset, transform.rotation, transform);
         spawnedObjects.Add(spawned);
+        spawnedObjects.Add(scoreSpawned);
 
         yield return new WaitForSeconds(Random.Range(minSpawnIntervalInSeconds, maxSpawnIntervalInSeconds));
         StartCoroutine(nameof(Spawn));

@@ -9,12 +9,13 @@ public class Score : MonoBehaviour
     [SerializeField] bool AIPlay = false;
     [SerializeField] public Transform player;
     [SerializeField] public TextMeshProUGUI display;
-
+    [SerializeField] Rotater rotater;
+     
     void Update()
     {
         if (AIPlay)
         {
-            display.text = "Score : " + (player.position.y - ForwardMovement.Instance.startPosition.y).ToString("0");
+            display.text = "Score : " + (rotater.score).ToString("#.0");
         }
         else
         {

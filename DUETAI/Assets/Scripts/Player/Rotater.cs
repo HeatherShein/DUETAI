@@ -13,6 +13,7 @@ public class Rotater : Agent
     Rigidbody2D rb;
     float touchPosX;
     Camera cam;
+    public float score = 0f;
 
     void Start()
     {
@@ -46,6 +47,7 @@ public class Rotater : Agent
         if (collision.gameObject.CompareTag("Score"))
         {
             AddReward(0.1f);
+            score += 0.1f;
             Destroy(collision.gameObject);
         }
     }

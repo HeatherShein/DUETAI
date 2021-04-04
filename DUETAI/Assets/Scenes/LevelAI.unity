@@ -584,7 +584,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 304080328}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.75, y: 0, z: -2}
+  m_LocalPosition: {x: -1.75, y: 0, z: 0}
   m_LocalScale: {x: 0.35, y: 0.35, z: 1}
   m_Children:
   - {fileID: 346397468}
@@ -5941,7 +5941,6 @@ Transform:
   - {fileID: 235914568}
   - {fileID: 333718756}
   - {fileID: 304080329}
-  - {fileID: 2049624744}
   m_Father: {fileID: 1806592074}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11245,6 +11244,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 449751904}
+  - {fileID: 2049624744}
   m_Father: {fileID: 351694264}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11297,6 +11297,7 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 1000
   rotationSpeed: 400
+  score: 0
 --- !u!114 &1806592078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11315,7 +11316,7 @@ MonoBehaviour:
     VectorActionSize: 03000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
-  m_Model: {fileID: 5022602860645237092, guid: a1f069b14b95f2d4e93aed8ac87d5fcd, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 2d005caa742a45a4c9ba4ef323fdc752, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 2
   m_BehaviorName: Rotater
@@ -11336,7 +11337,7 @@ GameObject:
   - component: {fileID: 1833031769}
   - component: {fileID: 1833031771}
   m_Layer: 0
-  m_Name: Text
+  m_Name: Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11473,6 +11474,7 @@ MonoBehaviour:
   AIPlay: 1
   player: {fileID: 1806592074}
   display: {fileID: 1833031769}
+  rotater: {fileID: 1806592077}
 --- !u!1 &1848608959
 GameObject:
   m_ObjectHideFlags: 0
@@ -11545,8 +11547,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 449751904}
-  m_RootOrder: 3
+  m_Father: {fileID: 1806592074}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!114 &2049624745
 MonoBehaviour:
@@ -11563,8 +11565,8 @@ MonoBehaviour:
   m_SensorName: RayPerceptionSensor
   m_DetectableTags:
   - Obstacle
-  m_RaysPerDirection: 1
-  m_MaxRayDegrees: 23.2
+  m_RaysPerDirection: 5
+  m_MaxRayDegrees: 180
   m_SphereCastRadius: 0.5
   m_RayLength: 20
   m_RayLayerMask:

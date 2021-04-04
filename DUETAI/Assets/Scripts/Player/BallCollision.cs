@@ -23,8 +23,6 @@ public class BallCollision : MonoBehaviour
     {
         if (other.collider.CompareTag("Obstacle"))
         {
-            Debug.Log(other.gameObject);
-
             GameManager.Instance.isGameOver = true;
 
             explosionFx.Play();
@@ -33,6 +31,7 @@ public class BallCollision : MonoBehaviour
             if (AIPlay)
             {
                 rotater.AddReward(-1f);
+                rotater.score -= 1f;
                 rotater.EndEpisode();
             }
             else
